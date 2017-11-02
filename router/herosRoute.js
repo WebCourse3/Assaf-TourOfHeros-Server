@@ -11,5 +11,9 @@ herosRouter.get('/', function (req, res) {
 	res.send('heros home page')
 })
 
+herosRouter.get('/', function (req, res) {
+	res.send('heros about page')
+})
+
 
 module.exports = herosRouter;
