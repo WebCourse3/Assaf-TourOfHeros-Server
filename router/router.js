@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 
 //other routes
-var heros = require('./heros')
+var heros = require('./herosRoute')
 
 //configure other routes
 router.use('/heros', heros)
@@ -16,8 +16,5 @@ router.use(function timeLog (req, res, next) {
 router.get('/', function (req, res) {
 	res.send('Home page')
 })
-
-
-
 
 module.exports = router;

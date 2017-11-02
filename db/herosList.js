@@ -1,36 +1,18 @@
-var herosList = [
-	{
-		id: 1,
-		name: "Assaf Marzan"
-	},
-	{
-		id: 2,
-		name: "Orel Zluf"
-	},
-	{
-		id: 3,
-		name: "Yarden Liron"
-	},
-	{
-		id: 4,
-		name: "Tomer Dobkin"
-	},
-	{
-		id: 5,
-		name: "Itay Goldman"
-	},
-	{
-		id: 6,
-		name: "Gil Elbaz"
-	},
-	{
-		id: 7,
-		name: "Chen Turgeman"
-	},
-	{
-		id: 8,
-		name: "Alex Borochov"
-	}
-]
+'use strict';
 
-this.module = herosList;
+const Hero = require('../models/hero.js');
+
+var herosList = [
+	new Hero("1", "Assaf Marzan"),
+	new Hero("2", "Yuval Marzan"),
+	new Hero("3", "Orel Zluf"),
+	new Hero("4", "Tomer Dobkin"),
+	new Hero("5", "Itay Goldman"),
+	new Hero("6", "Gil Elbaz"),
+	new Hero("7", "Chen Turgeman"),
+	new Hero("8", "Alex Borochov")
+];
+
+module.exports = herosList;
+
+
