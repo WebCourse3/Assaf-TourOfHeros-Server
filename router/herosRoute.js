@@ -16,7 +16,8 @@ herosRouter.use(function timeLog (req, res, next) {
 	next()
 })
 
-herosRouter.route('/').get(function (req, res) {
+herosRouter.route('/')
+	.get(function (req, res) {
 	res.json(herosHandler.getHeros());
 })
 	.post(function(req,res)
