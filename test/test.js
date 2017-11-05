@@ -1,8 +1,18 @@
-var assert = require('assert');
-describe('Array', function() {
-	describe('#indexOf()', function() {
-		it('should return -1 when the value is not present', function() {
-			assert.equal(-1, [1,2,3].indexOf(4));
+const Hero = require('../models/hero.js');
+var herosHandler = require('../db/herosHandler')
+
+var herosList = [
+	new Hero("1", "Assaf Marzan"),
+	new Hero("2", "Yuval Marzan"),
+	new Hero("3", "Orel Zluf"),
+	new Hero("4", "Tomer Dobkin")
+];
+
+describe('herosHandler', function() {
+	describe('#getHeroById()', function() {
+		it('should return the hero matched by the id', function() {
+			herosHandler.heros
 		});
 	});
 });
+

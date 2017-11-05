@@ -3,11 +3,12 @@
 const Hero = require('../models/hero.js');
 var heros = require('./herosList')
 
-class herosHandler {
 
+class herosHandler {
 	static getHeros() {
 		return heros;
 	}
+
 	static getHeroById(id) {
 		return heros.find(hero => hero.id == id);
 	}
@@ -34,3 +35,4 @@ class herosHandler {
 	}
 }
 module.exports = herosHandler;
+moudle.exports.heros = heros;
