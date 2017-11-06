@@ -1,38 +1,43 @@
 'use strict';
 
 const Hero = require('../models/hero.js');
-var heros = require('./herosList')
-
 
 class herosHandler {
-	static getHeros() {
-		return heros;
+	constructor(heros) {
+		this.heros = heros;
 	}
 
-	static getHeroById(id) {
-		return heros.find(hero => hero.id == id);
+	getHeros() {
+		return this.heros;
 	}
 
-	static heroExists(id) {
-		return heros.filter(hero => hero.id == id).length === 1;
+	getHeroById(id) {
+		return this.heros.find(hero => hero.id == id);
 	}
 
-	static addHero(heroId, heroName) {
-		heros.push(new Hero(heroId, heroName));
+	heroExists(id) {
+		return this.heros.filter(hero => hero.id == id).length === 1;
 	}
 
-	static deleteHeroById(id) {
-		heros = heros.filter(hero => hero.id !== id);
+	addHero(heroId, heroName) {
+		if(this.heroExists(heroId)){
+			throw new Error("hero with id already exists");
+		} else {
+			this.heros.push(new Hero(heroId, heroName));
+		}
 	}
 
-	static deleteHeroByName(name) {
-		heros = heros.filter(hero => hero.name !== name);
+	deleteHeroById(id) {
+		this.heros = this.heros.filter(hero => hero.id !== id);
 	}
 
-	static updateHeroName(id, newName) {
-		let hero = herosHandler.getHeroById(id);
-		herosHandler.getHeroById(id).name = newName;
+	deleteHeroByName(name) {
+		this.heros = this.heros.filter(hero => hero.name !== name);
+	}
+
+	updateHeroName(id, newName) {
+		this.getHeroById(id).name = newName;
 	}
 }
+
 module.exports = herosHandler;
-moudle.exports.heros = heros;

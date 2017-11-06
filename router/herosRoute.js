@@ -1,6 +1,6 @@
 var express = require('express')
 var herosRouter = express.Router()
-var herosHandler = require('../db/herosHandler');
+var herosHandler = require('../global/objects').herosHandler;
 var bodyParser = require('body-parser')
 
 
