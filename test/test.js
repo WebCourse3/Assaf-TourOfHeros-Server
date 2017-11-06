@@ -6,6 +6,7 @@ const   should = require('should'),
 const herosRouter = require('../router/herosRoute.js');
 const Hero = require('../models/hero.js');
 const herosHandler = require('../db/herosHandler');
+const app = require('../server.js').app;
 
 chai.use(chaiHttp);
 
@@ -148,17 +149,20 @@ describe('herosHandler', function() {
 		describe('updateHeroName(id, newName)', function () {
 			it('hero name should change', function () {
 				//assumptions
-				const id = '1';
+				const oldName = "Assaf";
 				const newName = "Bla bla";
+				const getHeroByIdStub = sinon.stub();
+
+				const hero = {name: oldName};
+				getHeroByIdStub.returns(hero);
 
 				//action
-				handler.updateHeroName(id, newName);
-				let updatedHero = handler.getHeroById(id);
+				handler.getHeroById = getHeroByIdStub;
+				handler.updateHeroName("", newName);
 
 				//asserts
-				updatedHero.name.should.equal(newName);
+				hero.name.should.equals(newName);
 			});
-
 		});
 	});
 	describe('Delete Methods', function () {
@@ -195,6 +199,17 @@ describe('herosHandler', function() {
 
 				//asserts
 				aftLength.should.be.equal(curLength);
+			});
+		});
+	});
+});
+
+describe('hero router', () => {
+	describe('GET /', () => {
+		it('Should return all heroes', (done) => {
+			chai.request(app).get('/').end((err, res) => {
+				(true).should.equal(true);
+				done();
 			});
 		});
 	});
