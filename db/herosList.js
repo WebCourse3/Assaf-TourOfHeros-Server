@@ -14,5 +14,3 @@ var herosList = [
 ];
 
 module.exports = herosList;
-
-

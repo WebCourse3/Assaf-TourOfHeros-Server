@@ -1,7 +1,13 @@
-var should = require('should');
+const   should = require('should'),
+	    chai = require('chai'),
+	    chaiHttp = require('chai-http'),
+		sinon = require('sinon');
 
+const herosRouter = require('../router/herosRoute.js');
 const Hero = require('../models/hero.js');
-var herosHandler = require('../db/herosHandler');
+const herosHandler = require('../db/herosHandler');
+
+chai.use(chaiHttp);
 
 
 describe('herosHandler', function() {
@@ -15,8 +21,8 @@ describe('herosHandler', function() {
 
 		let handler = new herosHandler(herosList);
 
-		describe('#getHeros()', function () {
-			it('should return an hero array', function () {
+		describe('getHeros()', function () {
+			it('should return an hero array of specific length', function () {
 				//assumptions
 				let arrayLength = 3;
 				let herosList = new Array(3);
@@ -31,7 +37,7 @@ describe('herosHandler', function() {
 			});
 		});
 
-		describe('#getHeroById(id)', function () {
+		describe('getHeroById(id)', function () {
 			it('should return an hero instance of matched id', function () {
 				//assumptions
 				let id = '2'
@@ -44,7 +50,7 @@ describe('herosHandler', function() {
 			});
 		});
 
-		describe('#heroExists(id)', function () {
+		describe('heroExists(id)', function () {
 			it('should return true if hero exists', function () {
 				//assumptions
 				let id = '2'
@@ -86,13 +92,35 @@ describe('herosHandler', function() {
 			new Hero('8', "Alex Borochov")
 		];
 
-		let handler = new herosHandler(herosList);
+		const handler = new herosHandler(herosList);
 
 		describe('addHero(heroId, heroName)', function () {
+			it('hero exists being called once', function () {
+				//assumptions
+				const newId = 4;
+				const newName = "Bla bla";
+				const heroExistsStub = sinon.spy();
+
+
+				//stub
+				handler.heroExists = heroExistsStub;
+
+				//action
+				handler.addHero(newId, newName);
+
+				//asserts
+				heroExistsStub.callCount.should.equal(1);
+
+			});
+
 			it('heros length should increase by 1', function () {
 				//assumptions
 				const newId = 4;
 				const newName = "Bla bla";
+
+				//mock
+				handler.heroExists = sinon.stub();
+				handler.heroExists.withArgs(newId).returns(false);
 
 				//action
 				let curLength = handler.getHeros().length;
@@ -103,15 +131,17 @@ describe('herosHandler', function() {
 				aftLength.should.be.equal(curLength + 1);
 			});
 
-
 			it('throw exception when heroId already exists', function () {
 				//assumptions
 				const newId = '1';
 				const newName = "Bla bla";
 
+				//mock
+				handler.heroExists = sinon.stub();
+				handler.heroExists.withArgs(newId).returns(true);
+
 				//asserts
 				should(function ()  {(handler.addHero(newId, newName))} ).throw()
-
 			});
 		});
 
@@ -121,7 +151,6 @@ describe('herosHandler', function() {
 				const id = '1';
 				const newName = "Bla bla";
 
-
 				//action
 				handler.updateHeroName(id, newName);
 				let updatedHero = handler.getHeroById(id);
@@ -129,6 +158,7 @@ describe('herosHandler', function() {
 				//asserts
 				updatedHero.name.should.equal(newName);
 			});
+
 		});
 	});
 	describe('Delete Methods', function () {
@@ -139,7 +169,7 @@ describe('herosHandler', function() {
 			new Hero('8', "Alex Borochov")
 		];
 
-		let handler = new herosHandler(herosList);
+		const handler = new herosHandler(herosList);
 
 		describe('deleteHeroById(heroId)', function () {
 			it('length should decrease by 1', function () {
@@ -169,4 +199,3 @@ describe('herosHandler', function() {
 		});
 	});
 });
-
