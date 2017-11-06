@@ -102,7 +102,6 @@ describe('herosHandler', function() {
 				const newName = "Bla bla";
 				const heroExistsStub = sinon.spy();
 
-
 				//stub
 				handler.heroExists = heroExistsStub;
 
@@ -207,7 +206,7 @@ describe('herosHandler', function() {
 describe('hero router', () => {
 	describe('GET /', () => {
 		it('Should return all heroes', (done) => {
-			chai.request(app).get('/').end((err, res) => {
+			chai.request(app).get('/heros/').end((err, res) => {
 				(true).should.equal(true);
 				done();
 			});
