@@ -1,25 +1,26 @@
 'use strict';
-
-const Hero = require('../models/hero.js');
+import Hero = require('../models/hero');
 
 class herosHandler {
-	constructor(heros) {
+	heros: Array<Hero>;
+
+	constructor(heros: Array<Hero>) {
 		this.heros = heros;
 	}
 
-	getHeros() {
+	getHeros(): Array<Hero> {
 		return this.heros;
 	}
 
-	getHeroById(id) {
+	getHeroById(id: string): Hero {
 		return this.heros.find(hero => hero.id == id);
 	}
 
-	heroExists(id) {
+	heroExists(id: string) {
 		return this.heros.filter(hero => hero.id == id).length === 1;
 	}
 
-	addHero(heroId, heroName) {
+	addHero(heroId: string, heroName: string) {
 		if(this.heroExists(heroId)){
 			throw new Error("hero with id already exists");
 		} else {
@@ -27,17 +28,17 @@ class herosHandler {
 		}
 	}
 
-	deleteHeroById(id) {
+	deleteHeroById(id: string) {
 		this.heros = this.heros.filter(hero => hero.id !== id);
 	}
 
-	deleteHeroByName(name) {
+	deleteHeroByName(name: string) {
 		this.heros = this.heros.filter(hero => hero.name !== name);
 	}
 
-	updateHeroName(id, newName) {
+	updateHeroName(id:string, newName:string) {
 		this.getHeroById(id).name = newName;
 	}
 }
 
-module.exports = herosHandler;
+export = herosHandler;

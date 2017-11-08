@@ -3,10 +3,10 @@ const   should = require('should'),
 	    chaiHttp = require('chai-http'),
 		sinon = require('sinon');
 
-const herosRouter = require('../router/herosRoute.js');
-const Hero = require('../models/hero.js');
+const herosRouter = require('../router/herosRoute.ts');
+const Hero = require('../models/hero.ts');
 const herosHandler = require('../db/herosHandler');
-const app = require('../server.js').app;
+const app = require('../server.ts').app;
 
 chai.use(chaiHttp);
 

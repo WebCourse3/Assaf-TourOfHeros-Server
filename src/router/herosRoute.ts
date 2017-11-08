@@ -1,7 +1,11 @@
-var express = require('express')
-var herosRouter = express.Router()
-var herosHandler = require('../global/objects').herosHandler;
-var bodyParser = require('body-parser')
+
+import express = require('express')
+import { Request } from 'express';
+import { Response } from 'express';
+
+let herosRouter = express.Router()
+let herosHandler = require('../global/objects').herosHandler;
+let bodyParser = require('body-parser')
 
 
 //router settings
@@ -11,16 +15,16 @@ herosRouter.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 // middleware that is specific to this router
-herosRouter.use(function timeLog (req, res, next) {
+herosRouter.use(function timeLog (req: Request , res: Response, next) {
 	console.log('Hero Time: ', Date.now())
 	next()
 })
 
 herosRouter.route('/')
-	.get(function (req, res) {
+	.get(function (req: Request, res) {
 	res.json(herosHandler.getHeros());
 })
-	.post(function(req,res)
+	.post(function(req: Request, res: Response)
 		{
 			let heroId = req.body.id;
 			let heroName = req.body.name;
@@ -34,7 +38,7 @@ herosRouter.route('/')
 			}
 		}
 	)
-	.delete(function(req,res)
+	.delete(function(req: Request,res: Response)
 		{
 			let heroName = req.query.name;
 			herosHandler.deleteHeroByName(heroName)
@@ -43,11 +47,11 @@ herosRouter.route('/')
 	)
 
 herosRouter.route('/:id')
-	.get(function (req, res) {
+	.get(function (req: Request, res: Response) {
 		let heroId = req.params.id;
 		res.json(herosHandler.getHeroById(heroId));
 	})
-	.put(function (req, res) {
+	.put(function (req: Request, res: Response) {
 		let heroId = req.params.id;
 		let heroNewName = req.query.heroName;
 
@@ -58,7 +62,7 @@ herosRouter.route('/:id')
 			res.json({message: "hero wasn't found"});
 		}
 	})
-	.delete(function(req,res)
+	.delete(function(req: Request,res: Response)
 		{
 			let heroId = req.params.id;
 			herosHandler.deleteHeroById(heroId)
@@ -66,4 +70,4 @@ herosRouter.route('/:id')
 		}
 	)
 
-module.exports = herosRouter;
+export = herosRouter;

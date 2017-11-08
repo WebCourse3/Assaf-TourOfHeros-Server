@@ -1,6 +1,5 @@
 'use strict';
-
-const Hero = require('../models/hero.js');
+import Hero = require('../models/hero');
 
 var herosList = [
 	new Hero("1", "Assaf Marzan"),
@@ -13,4 +12,4 @@ var herosList = [
 	new Hero("8", "Alex Borochov")
 ];
 
-module.exports = herosList;
+export = herosList;
