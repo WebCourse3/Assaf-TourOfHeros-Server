@@ -25,7 +25,6 @@ herosRouter.route('/')
 			let heroId = req.body.id;
 			let heroName = req.body.name;
 
-
 			if(!herosHandler.heroExists(heroId)) {
 				herosHandler.addHero(heroId, heroName);
 				res.json({message: "added new hero"});
