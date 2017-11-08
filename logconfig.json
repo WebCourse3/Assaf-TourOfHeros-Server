@@ -1,0 +1,7 @@
+{
+    "writeToConsole": true,
+    "useColors": true,
+    "writeToFile": true,
+    "filePath": "./output.log",
+    "level": "Debug"
+}
