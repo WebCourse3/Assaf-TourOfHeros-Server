@@ -19,6 +19,7 @@ logger1.error('now with some error', 'this too');
 
 logger2.log(null, 'and i am logger 2 writing to you');
 logger2.warning('bye bye');
+logger2.config
 
 app.use('/', router)
 

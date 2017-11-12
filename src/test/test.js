@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 
 
 describe('herosHandler', function() {
-	describe('Get Methods', function () {
+	describe('Get Methods', function ( ) {
 		//assumptions
 		let herosList = [
 			new Hero("1", "Assaf Marzan"),
